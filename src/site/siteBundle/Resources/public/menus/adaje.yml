@@ -1,0 +1,56 @@
+name: adaje
+roles:
+    view: null
+    edit: ROLE_ADMIN
+    delete: ROLE_SUPER_ADMIN
+menu:
+    accueil:
+        name: menu.accueil
+        icon: fa-home
+        path:
+            route: site_pageweb
+            params:
+                pageweb: homepage
+    presentation:
+        name: menu.presentation
+        path:
+            route: site_pageweb
+            params:
+                pageweb: presentation
+    tarifs_horaires:
+        name: menu.tarifs_horaires
+        path:
+            route: site_pageweb
+            params:
+                pageweb: tarifs_horaires
+    contact:
+        name: menu.contact
+        path:
+            route: site_pageweb
+            params:
+                pageweb: contact
+    # langues:
+    #     icon: fa-flag
+    #     title: traduction.langues
+    #     path:
+    #         route: '#'
+    #     items:
+    #         français:
+    #             name: traduction.languename.fr
+    #             path:
+    #                 route: '#'
+    #                 params:
+    #                     _locale: fr
+    #         anglais:
+    #             name: traduction.languename.en
+    #             path:
+    #                 route: '#'
+    #                 params:
+    #                     _locale: en
+    logout:
+        role: IS_AUTHENTICATED_REMEMBERED
+        icon: fa-lock
+        name: layout.logout
+        trans_domain: siteUserBundle
+        path:
+            route: fos_user_security_logout

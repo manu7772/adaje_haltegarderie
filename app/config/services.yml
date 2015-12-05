@@ -1,0 +1,63 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+    ae_services:           site\services\
+
+services:
+    #service_name:
+    #    class: AppBundle\Directory\ClassName
+    #    arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    # fonctionnalités de base / boîte à outils
+    aetools.aetools:
+        class: %ae_services%aetools
+        arguments: [@service_container]
+
+    # fonctionnalités d'entités
+    aetools.aeEntities:
+        class: %ae_services%aeEntities
+        arguments: [@service_container]
+
+    # fonctionnalités de pages web
+    aetools.pageweb:
+        class: %ae_services%pageweb
+        arguments: [@service_container]
+
+    # fonctionnalités images / formats d'images
+    aetools.media:
+        class: %ae_services%aeImages
+        arguments: [@doctrine.orm.entity_manager]
+
+    # fonctionnalités tags
+    aetools.tag:
+        class: %ae_services%aeTags
+        arguments: [@doctrine.orm.entity_manager]
+
+    # Fonctions textes utiles et pratiques pour utilisation dans TWIG
+    aetools.textutilities:
+        class: %ae_services%twigTools
+        arguments: [@service_container]
+        tags:
+            - { name: twig.extension }
+
+
+    #######################
+    ### SUCCESS HANDLER ###
+    #######################
+
+    ae.success_handler:
+        class: %ae_services%SuccessHandler
+        arguments: [@router, @service_container]
+        public: false
+
+
+    ######################
+    ### EVENT LISTENER ###
+    ######################
+
+    # EventListerner sur paramètres généraux du site
+    # aetools.site_listener:
+    #     class: %ae_services%siteListener
+    #     # arguments: [@service_container]
+    #     tags:
+    #         - { name: kernel.event_listener, event: kernel.controller, method: load }

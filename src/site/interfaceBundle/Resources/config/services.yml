@@ -1,0 +1,111 @@
+parameters:
+#    acme_grouplabo_inspinia.example.class: site\interfaceBundle\Example
+    siteinterfaceBundle:        site\interfaceBundle
+    interfaceBundleservices:   	%siteinterfaceBundle%\services
+    interfaceFormType:   	    %siteinterfaceBundle%\Form\Type\
+
+services:
+#    acme_grouplabo_inspinia.example:
+#        class: %acme_grouplabo_inspinia.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    labo_subQueryBlocks:
+        class: %interfaceBundleservices%\subQueryBlocks
+        arguments: [@service_container]
+        tags:
+            - { name: twig.extension }
+
+    labo_user_roles:
+        class: %interfaceBundleservices%\RolesService
+        arguments: ['%security.role_hierarchy.roles%']
+        tags:
+            - { name: twig.extension }
+
+    tools_json:
+        class: %interfaceBundleservices%\toolsJson
+        arguments: []
+
+    aeMenus:
+        class: %interfaceBundleservices%\aeMenus
+        arguments: [@service_container]
+
+    # fonctionnalités de messages (flashbag) & Exceptions
+    # aetools.aeMessages:
+    #     class: %interfaceBundleservices%\aeMessages
+    #     arguments: [@service_container]
+
+    flash_messages:
+        class: %interfaceBundleservices%\flashMessages
+        arguments: [@service_container]
+
+    ###################################
+    ### ELEMENTS DE FORMULAIRES
+    ###################################
+
+    # Éléments de formulaires personnalisés
+    form.type.insImageCropper:
+        class: %interfaceFormType%insImageCropperType
+        tags:
+            - { name: form.type, alias: insImageCropper }
+
+    form.type.insColorpicker:
+        class: %interfaceFormType%insColorpickerType
+        tags:
+            - { name: form.type, alias: insColorpicker }
+
+    form.type.bs_button:
+        class: %interfaceFormType%bs_buttonType
+        tags:
+            - { name: form.type, alias: bs_button }
+
+    form.type.insTelephone:
+        class: %interfaceFormType%insTelephoneType
+        tags:
+            - { name: form.type, alias: insTelephone }
+
+    form.type.insDept:
+        class: %interfaceFormType%insDeptType
+        tags:
+            - { name: form.type, alias: insDept }
+
+    form.type.insCpostal:
+        class: %interfaceFormType%insCpostalType
+        tags:
+            - { name: form.type, alias: insCpostal }
+
+    form.type.insSiren:
+        class: %interfaceFormType%insSirenType
+        tags:
+            - { name: form.type, alias: insSiren }
+
+    form.type.insSiret:
+        class: %interfaceFormType%insSiretType
+        tags:
+            - { name: form.type, alias: insSiret }
+
+    form.type.insRichtext:
+        class: %interfaceFormType%insRichtextType
+        tags:
+            - { name: form.type, alias: insRichtext }
+
+    form.type.insRadio:
+        class: %interfaceFormType%insRadioType
+        tags:
+            - { name: form.type, alias: insRadio }
+
+    form.type.insCheck:
+        class: %interfaceFormType%insCheckType
+        tags:
+            - { name: form.type, alias: insCheck }
+
+    form.type.multiCollection:
+        class: %interfaceFormType%multiCollectionType
+        tags:
+            - { name: form.type, alias: multiCollection }
+
+    form.type.insDatepicker:
+        class: %interfaceFormType%insDatepickerType
+        arguments:
+            - "%formatDate%"
+        tags:
+            - { name: form.type, alias: insDatepicker }

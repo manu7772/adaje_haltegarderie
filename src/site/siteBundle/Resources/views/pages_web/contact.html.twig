@@ -1,0 +1,100 @@
+{% extends 'sitesiteBundle:bases:base_simple.html.twig' %}
+
+{% block sections %}
+
+        <!-- Intro Section -->
+        <section class="inner-intro inner-intro-xsmall light-color overlay-dark parallax parallax-background2" style="background-image: url({{ asset('bundles/sitesite/img/full/background_contact_2.png') }});">
+            <div class="container">
+                <div class="row title">
+                    <h2 class="h2">{{ pageweb.titreh1|raw }}</h2>
+                </div>
+            </div>
+        </section>
+        <div class="pb-30 clearfix"></div>
+        <!-- End Intro Section -->
+
+        <!-- Contact Section -->
+        <section class="pb-sm-30">
+            <div class="container">
+                {% if pageweb.code|trim|length > 0 %}
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">{{ pageweb.code|raw }}</div>
+                </div>
+                <div class="spacer-30"></div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-5 contact">
+                        <div class="contact-box-left mb-45">
+                            <div class="contact-icon-left"><i class="ion ion-ios-location"></i></div>
+                            <h6>Halte-Garderie La Ribambelle</h6>
+                            <p>
+                                Rue du Pré de la Forge
+                                <br>
+                                76280 Criquetot L'Esneval
+                                <br>
+                                <small>La crèche et les haltes-garderies municipales sont soutenues par la Caisse d’Allocations familiales et le Département de Seine-Maritime</small>
+                            </p>
+                            <a href="mailto:contact@imagoguitare.com"><i class="fa fa-envelope-o left"></i>adaje@orange.fr</a>
+                            <br>
+                            <a><i class="fa fa-phone left"></i>02 35 27 45 96</a>
+                        </div>
+                        <div class="contact-box-left mb-45">
+                            <div class="contact-icon-left"><i class="ion ion-ios-clock"></i></div>
+                            <h6>Horaires</h6>
+                            <p>
+                                <span>Du lundi au vendredi</span>
+                                <br>
+                                <span>8h / 18h</span>
+                                <br>
+                                <span>Le samedi / nous consulter</span>
+                            </p>
+                        </div>
+                        <div class="contact-box-left mb-45">
+
+                            <h6>Réseaux sociaux</h6>
+                            <ul class="list-none social">
+                                <!-- <li><a href="https://www.twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li> -->
+                                <!-- <li><a href="https://instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a></li> -->
+                                <li><a href="https://www.facebook.com/rikett.rico" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://vimeo.com/" target="_blank"><i class="fa fa-vimeo-square"></i></a></li>
+                                <!-- <li><a href="https://www.behance.net/" target="_blank"><i class="fa fa-behance"></i></a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-1">
+                        {% if message_success is defined %}
+                        <div class="alert alert-info" role="alert">
+                            {{ message_success|trans }}
+                        </div>
+                        {% endif %}
+                        {% if message_error is defined %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message_error|trans }}
+                        </div>
+                        {% endif %}
+                        {{ form_start(message_form) }}
+                        {{ form_errors(message_form) }}
+                        {% for item in ['nom', 'email', 'objet', 'message'] %}
+                        <div class="form-field-wrapper">
+                            {{ form_widget(message_form[item]) }}
+                            {{ form_errors(message_form[item]) }}
+                        </div>
+                        {% endfor %}
+                        {{ form_rest(message_form) }}
+                        {{ form_end(message_form) }}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Section -->
+
+        <!-- Map Section -->
+        <section class="map map-border map-radius-4">
+            <div id="map" data-coord="49.641375:0.257203:15" data-title="La Ribambelle"></div>
+        </section>
+        <!-- Map Section -->
+
+        <br>
+        <br>
+
+{% endblock sections %}

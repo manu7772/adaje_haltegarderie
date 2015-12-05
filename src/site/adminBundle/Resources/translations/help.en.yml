@@ -1,0 +1,7 @@
+conseil: advice
+tag:
+    title: 'add some tags'
+    addtag: 'to add a lot of tags in one time, separate them with comma or <return> key.'
+file_format:
+    title: 'about file types'
+    suppformat: 'a used file type can not be deleted. To delete a file type, you need to delete all files that use this file type before.'

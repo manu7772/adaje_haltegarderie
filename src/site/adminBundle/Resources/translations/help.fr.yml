@@ -1,0 +1,7 @@
+conseil: conseil
+tag:
+    title: 'ajouter des tags'
+    addtag: 'pour ajouter plusieurs tags en une fois, séparez-les par des virgules ou des retours à la ligne.'
+file_format:
+    title: 'au sujet des types de fichiers'
+    suppformat: 'un type de fichier utilisé ne peut être supprimé. Pour pouvoir le supprimer, vous devez supprimer tous les fichiers de ce type au préalable.'

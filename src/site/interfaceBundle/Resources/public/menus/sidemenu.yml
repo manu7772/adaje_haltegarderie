@@ -1,0 +1,11 @@
+name: sidemenu
+roles:
+    view: ROLE_SUPER_ADMIN
+    edit: ROLE_SUPER_ADMIN
+    delete: ROLE_SUPER_ADMIN
+menu:
+    admin:
+        name: bundles.admin.name
+        icon: fa-cog
+        path:
+            route: siteinterface_homepage

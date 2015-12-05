@@ -1,0 +1,55 @@
+{% extends 'siteinterfaceBundle:entites:entiteShow.html.twig' %}
+
+{% block page_heading %}
+	{{ parent() }}
+{% endblock page_heading %}
+
+{% block content %}
+<div class="row">
+
+	<div class="col-md-8">
+		<div class="ibox float-e-margins">
+			<div class="ibox-content">
+				<h2 class="row">
+					<div class="col-md-8">{{ entite.originalnom }}</div>
+					<div class="col-md-4">
+						<a href="{{ path('siteadmin_entite', {entite: entite_name, id: entite.id, action: 'delete'}) }}" type="button" class="btn btn-xs btn-danger btn-outline pull-right need-confirmation" title="{{ 'actions.suppression'|trans|capitalize }}" data-message="{{ 'actions.suppQuestion'|trans({'%name%': entite.nom|default('#' ~ entite.id)})|capitalize }}"><i class="fa fa-times icon-wait-on-click"></i> {{ 'actions.supprimer'|trans|capitalize }}</a>
+						<a href="{{ path('siteadmin_entite', {entite: entite_name, id: entite.id, action: 'edit'}) }}" type="button" class="btn btn-xs btn-warning pull-right"><i class="fa fa-pencil icon-wait-on-click"></i> {{ 'actions.modifier'|trans|capitalize }}</a>
+					</div>
+				</h2>
+				<hr>
+				<table class="table table-striped table-bordered table-hover dataTables dataTable dtr-inline" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+					<thead>
+						<tr>
+							<th>Libellé</th>
+							<th>valeurs</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><strong>{{ 'table.col.nom'|trans|capitalize }}</strong></td>
+							<td>{{ entite.originalnom }}</td>
+						</tr>
+						<tr>
+							<td><strong></strong></td>
+							<td>{{ ThumbMedia(entite, false, 'img-rounded')|raw }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h3>IMAGE</h3>
+			</div>
+			<div class="ibox-content text-center" style='min-height: 180px;'>
+				{{ ThumbMedia(entite, true, 'center-block img-rounded', 360)|raw }}
+			</div>
+		</div>
+	</div>
+
+</div>
+{% endblock content %}

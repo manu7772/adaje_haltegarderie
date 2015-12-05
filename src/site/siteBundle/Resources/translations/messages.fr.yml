@@ -1,0 +1,32 @@
+site:
+    title: 'Luthier contemporain, Guitare, Basse, Ukulélé'
+    description: 'le site du luthier malin en ligne :)'
+    keywords: 'luthier, contemporain, guitare, basse, ukulélé'
+bundles:
+    admin:
+        name: administration
+    translate:
+        name: traduction
+    User:
+        name: utilisateurs
+menu:
+    name: menu
+    name_s : menus
+    not_found: aucun menu trouvé
+    create_btn: nouveau menu
+    accueil: accueil
+    realisations: réalisations
+    videos: vidéos
+    login: connexion
+    contact: contact
+    presentation: présentation
+    tarifs_horaires: tarifs et horaires
+search:
+    name: rechercher…
+footer:
+    realisation: 'réalisé par %name%'
+    generation: 'réalisé avec'
+    rights: 'tous droits réservés'
+message:
+    success: 'Votre message a été envoyé. Merci.'
+    error: 'Votre message n''a pu être enregistré. Merci de le compléter avant d''envoyer.'

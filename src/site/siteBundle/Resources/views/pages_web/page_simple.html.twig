@@ -1,0 +1,60 @@
+{% extends 'sitesiteBundle:bases:base_simple.html.twig' %}
+
+{% block sections %}
+
+        <!-- Intro Section -->
+        <section class="inner-intro inner-intro-xsmall light-color overlay-dark parallax parallax-background2" style="background-image: url({{ asset('bundles/sitesite/img/full/Guitare_galets.jpg') }});">
+            <div class="container">
+                <div class="row title">
+                    <h2 class="h2">{{ pageweb.titreh1|raw }}</h2>
+                </div>
+            </div>
+        </section>
+        <div class="pb-30 clearfix"></div>
+        <!-- End Intro Section -->
+
+        <!-- Sidebar Section -->
+        <section class="pb-sm-30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-4 mt-xs-30">
+
+                        <div class="sidebar-widget">
+                            <h5>Modèles</h5>
+                            <hr>
+                            <ul>
+                                <li><a>Folk</a></li>
+                                <li><a>Jazz</a></li>
+                                <li><a>Electric</a></li>
+                                <li><a>Nylon</a></li>
+                                <li><a>Trad</a></li>
+                                <li><a>Bass</a></li>
+                                <li><a>Ukulélé</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h5>{{ 'tag.name_s'|trans|capitalize }}</h5>
+                            <hr>
+                            <ul class="widget-tag">
+                                {% for tag in pageweb.tags|default([]) %}
+                                <li><a>{{ tag.nom }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="col-md-9 col-sm-8">
+                        {{ pageweb.code|default('')|raw }}
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Sidebar Section -->
+
+{% endblock sections %}
+
+{% block footer %}
+{{ include('sitesiteBundle:blocks:footer_simple.html.twig') }}
+{% endblock footer %}

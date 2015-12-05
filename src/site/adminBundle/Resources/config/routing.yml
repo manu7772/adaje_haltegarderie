@@ -1,0 +1,49 @@
+siteadmin_homepage:
+    path:     /
+    defaults: { _controller: siteadminBundle:Default:index }
+
+siteadmin_support:
+    path:     /support
+    defaults: { _controller: siteadminBundle:Default:support }
+
+
+# ACTIONS ENTITES
+siteadmin_entite_type:
+    path:     /entite/{entite}/{type_related}/{type_field}/{type_values}/{action}/{id}
+    defaults: { _controller: siteadminBundle:entite:entitePage, action: null, id: null }
+
+siteadmin_entite:
+    path:     /entite/{entite}/{action}/{id}
+    defaults: { _controller: siteadminBundle:entite:entitePage, action: null, id: null }
+
+siteadmin_form_action:
+    path:     /form-action/{classname}
+    defaults: { _controller: siteadminBundle:entite:entitePostFormPage }
+    requirements:
+
+siteadmin_pageweb_set_default:
+    path:     /pageweb/set-as-default/{id}/{redir}
+    defaults: { _controller: siteadminBundle:entite:pageweb_as_default, redir: 'siteadmin_homepage' }
+
+# FILE FORMAT
+siteadmin_fileformat_resetall:
+    path:     /file-format/{erase}
+    defaults: { _controller: siteadminBundle:entite:resetFileFormats, erase: false }
+
+# MENUS
+siteadmin_menus:
+    path:     /menus/{name}
+    defaults: { _controller: siteadminBundle:menus:index, name: 'all' }
+
+siteadmin_menus_action:
+    path:     /menus/action/{action}/{bundle}/{name}
+    defaults: { _controller: siteadminBundle:menus:action, name: null }
+
+siteadmin_ajax_modify:
+    path:     /menus/ajax-modify/{bundle}/{name}
+    defaults: { _controller: siteadminBundle:menus:modify }
+
+# GENERATION SITE
+generate:
+    path:     /generate/{action}/{entite}
+    defaults: { _controller: siteadminBundle:generate:index, action: null, entite: null }

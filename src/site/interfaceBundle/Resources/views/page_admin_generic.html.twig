@@ -1,0 +1,35 @@
+{% extends 'siteinterfaceBundle:bases:base_' ~ cssjsloads|default('simple') ~ '.html.twig' %}
+
+{% block body %}
+
+	{% block sidebar %}
+	{{ render(controller('siteinterfaceBundle:Default:sidebar', {option: null})) }}
+	{% endblock sidebar %}
+
+	<div id="page-wrapper" class="gray-bg dashbard-3" style="min-height: 700px;">
+	{% block pagewrapper %}
+
+		<div class="row border-bottom">
+			{% block header %}
+			{{ render(controller('siteinterfaceBundle:Default:header', {option: null})) }}
+			{% endblock header %}
+		</div>
+
+		{% block page_heading %}
+		{% endblock page_heading %}
+
+		<div class="wrapper wrapper-content animated fadeInRight">
+			{% block content %}
+			{% endblock content %}
+		</div>
+
+		<div class="footer">
+		{% block footer %}
+		{{ include('siteinterfaceBundle:blocks:footer.html.twig') }}
+		{% endblock footer %}
+		</div>
+
+	{% endblock pagewrapper %}
+	</div>
+
+{% endblock body %}

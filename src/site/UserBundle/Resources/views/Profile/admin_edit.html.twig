@@ -1,0 +1,30 @@
+{% extends "siteUserBundle::admin_layout.html.twig" %}
+{% trans_default_domain 'siteUserBundle' %}
+
+{% block page_heading %}
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-12 m-t-xs">
+		<h2 class="row">
+			<div class="col-md-8">{{ 'profile.action.modify'|trans|capitalize }} {{ user.username }} {% if user.id == app.user.id %} <em><i>(moi-même)</i></em>{% endif %}</div>
+			<div class="col-md-4">
+				{% if user.id == app.user.id %}
+				<a href="{{ path('fos_user_profile_show') }}" type="button" class="btn btn-xs btn-warning pull-right" title="Modifier {{ user.username }}"><i class="fa fa-pencil icon-wait-on-click"></i></a>
+				<a href="{{ path('fos_user_deleting', {id: app.user.id}) }}" type="button" class="btn btn-xs btn-danger btn-outline pull-right need-confirmation" title="Supprimer votre compte" data-message="Ceci est votre compte ! Souhaitez-vous vraiment supprimer votre compte ?"><i class="fa fa-times icon-wait-on-click"></i> Supprimer</a>
+				{% elseif app.user.haveRight(user) %}
+				<a href="{{ path('siteUser_info', {username: user.username}) }}" style="margin-right: 4px;" type="button" class="btn btn-xs btn-warning pull-right"><i class="fa fa-pencil icon-wait-on-click"></i> Modifier</a>
+				<a href="{{ path('siteUser_delete', {username: user.username}) }}" type="button" class="btn btn-xs btn-danger btn-outline pull-right need-confirmation" title="Supprimer {{ user.username }}" data-message="Souhaitez-vous vraiment supprimer ce compte ?"><i class="fa fa-times icon-wait-on-click"></i> Supprimer</a>
+				{% endif %}
+			</div>
+		</h2>
+		<ol class="breadcrumb">
+			<li><a href="{{ path('siteadmin_homepage') }}"><strong>Administration</strong></a></li>
+			<li><a href="{{ path('siteUser_users', {type: 'all'}) }}"><strong>Utilisateurs</strong></a></li>
+			<li>{{ user.username }}</li>
+		</ol>
+	</div>
+</div>
+{% endblock page_heading %}
+
+{% block fos_user_content %}
+{% include "siteUserBundle:Profile:edit_content.html.twig" %}
+{% endblock fos_user_content %}

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block entete %}
+    {{ include('sitesiteBundle:blocks:keywords.html.twig') }}
+    {% endblock entete %}
+    {% block favicon %}
+    {{ include('sitesiteBundle:blocks:favicon.html.twig') }}
+    {% endblock favicon %}
+    <!-- CSS -->
+    {% block stylesheets %}
+    {% stylesheets filter='cssrewrite, lessphp, ?yui_css'
+    'bundles/sitesite/css/navigation.css'
+    'bundles/sitesite/css/plugin/flexslider.css'
+    'bundles/sitesite/css/plugin/owl.carousel.css'
+    'bundles/sitesite/css/plugin/mediaelementplayer.css'
+    'bundles/sitesite/css/plugin/colorbox.css'
+    'bundles/sitesite/css/plugin/jquery.fs.tipper.css'
+    'bundles/sitesite/css/style.less.css'
+    'bundles/sitesite/css/bootstrap.css'
+    'bundles/sitesite/css/font-awesome.css'
+    'bundles/sitesite/css/ionicons.css'
+    'bundles/sitesite/css/plugin/jPushMenu.css'
+    'bundles/sitesite/css/plugin/animate.css'
+    'bundles/sitesite/css/jquery-ui.css'
+    'http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+    {% endblock stylesheets %}
+
+</head>
+
+<body{% block bodyattributes %} class="full-intro background--dark"{% endblock bodyattributes %}>
+{% block googleAnalyticScript %}
+{{ include('sitesiteBundle:blocks:googleAnalyticScript.html.twig') }}
+{% endblock googleAnalyticScript %}
+{% block body %}
+
+    {% block preloader %}
+    <!-- Preloader -->
+    <section id="preloader">
+        <div class="loader" id="loader">
+            <div class="loader-img"></div>
+        </div>
+    </section>
+    <!-- End Preloader -->
+    {% endblock preloader %}
+
+    {% if sidemenuswitcher == true %}
+    <!-- Sidemenu -->
+    <section class="side-menu cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right">
+        <a class="menu-close toggle-menu menu-right push-body"><i class="ion ion-android-close"></i></a>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <h5 class="white">{{ app.user.username }}</h5>
+        <h6><a href="{{ path('fos_user_profile_show') }}">{{ 'profile.action.view'|trans({}, 'siteUserBundle')|capitalize }}</a></h6>
+        <h6 class="white"><i class="fa fa-power-off"></i> <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'siteUserBundle') }}</a></h6>
+        <hr>
+        <br>
+        {{ render(controller('sitesiteBundle:Default:sidemenu')) }}
+        {% else %}
+        {{ render(controller('siteUserBundle:Security:loginInPage')) }}
+        {% endif %}
+    </section>
+    <!--End Sidemenu -->
+    {% endif %}
+
+    {% if searchswitcher == true %}
+    <!-- Search menu Top -->
+    <section class=" top-search-bar cbp-spmenu cbp-spmenu-horizontal cbp-spmenu-top">
+        <div class="container">
+            <div class="search-wraper">
+                <input type="text" class="input-sm form-full" placeholder="{{ 'search.name'|trans|capitalize }}" name="search" />
+                <a class="search-bar-icon"><i class="fa fa-search"></i></a>
+                <a class="bar-close toggle-menu menu-top push-body"><i class="ion ion-android-close"></i></a>
+            </div>
+        </div>
+    </section>
+    <!--End Search menu Top -->
+    {% endif %}
+
+    <!-- Site Wraper -->
+    <div class="wrapper">
+    {% block wrapper %}
+
+        {% block header %}
+        <!-- HEADER -->
+        <header class="header">
+            <div class="container">
+
+                <!-- logo -->
+                <div class="logo">
+                    <a href="{{ path('sitesite_homepage') }}">
+                        <img class="l-black" src="{{ asset('bundles/sitesite/img/logo-black.png') }}" />
+                        <img class="l-white" src="{{ asset('bundles/sitesite/img/logo-white.png') }}" />
+                        <img class="l-color" src="{{ asset('bundles/sitesite/img/logo-color.png') }}" />
+                    </a>
+                </div>
+                <!--End logo-->
+
+                {% block sidemenubtn %}
+                <!-- Rightside Menu (Search, Cart, Bart icon) -->
+                <div class="side-menu-btn">
+                    <ul>
+                        {% if searchswitcher == true %}
+                        <!-- Search Icon -->
+                        <li class="">
+                            <a class="right-icon search toggle-menu menu-top push-body"><i class="fa fa-search"></i></a>
+                        </li>
+                        <!-- End Search Icon -->
+                        {% endif %}
+                        {% if sidemenuswitcher == true %}
+                        <!--Sidebar Menu Icon-->
+                        <li class="">
+                            <a class="right-icon bar-icon toggle-menu menu-right push-body"><i class="fa fa-cog"></i></a>
+                        </li>
+                        <!-- End Sidebar Menu Icon-->
+                        {% endif %}
+                    </ul>
+                </div>
+                <!-- End Rightside Menu -->
+                {% endblock sidemenubtn %}
+
+                {% block navigationtop %}
+                <!-- Navigation Menu -->
+                <nav class="navigation">
+                    {{ render(controller('sitesiteBundle:Default:topmenu')) }}
+                </nav>
+                <!--End Navigation Menu -->
+                {% endblock navigationtop %}
+
+            </div>
+        </header>
+        <!-- END HEADER -->
+        {% endblock header %}
+
+        {% block sections %}
+        {% endblock sections %}
+
+        {% block footer %}
+        {{ include('sitesiteBundle:blocks:footer_extended.html.twig') }}
+        {% endblock footer %}
+
+        {% block scrollup %}
+        <!-- Scroll Top -->
+        <a class="scroll-top">
+            <i class="fa fa-angle-double-up"></i>
+        </a>
+        <!-- End Scroll Top -->
+        {% endblock scrollup %}
+
+    {% endblock wrapper %}
+    </div>
+    <!-- Site Wraper End -->
+
+    <!-- JS -->
+    {% block javascripts %}
+    {% javascripts filter='?yui_js'
+    'bundles/sitesite/js/jquery-1.11.2.min.js'
+    'bundles/sitesite/js/plugin/jquery.easing.js'
+    'bundles/sitesite/js/jquery-ui.min.js'
+    'bundles/sitesite/js/bootstrap.min.js'
+    'bundles/sitesite/js/plugin/jquery.flexslider.js'
+    'bundles/sitesite/js/plugin/background-check.min.js'
+    'bundles/sitesite/js/plugin/jquery.fitvids.js'
+    'bundles/sitesite/js/plugin/jquery.viewportchecker.js'
+    'bundles/sitesite/js/plugin/jquery.stellar.min.js'
+    'bundles/sitesite/js/plugin/wow.min.js'
+    'bundles/sitesite/js/plugin/jquery.colorbox-min.js'
+    'bundles/sitesite/js/plugin/owl.carousel.min.js'
+    'bundles/sitesite/js/plugin/isotope.pkgd.min.js'
+    'bundles/sitesite/js/plugin/masonry.pkgd.min.js'
+    'bundles/sitesite/js/plugin/imagesloaded.pkgd.min.js'
+    'bundles/sitesite/js/plugin/jPushMenu.js'
+    'bundles/sitesite/js/plugin/jquery.fs.tipper.min.js'
+    'bundles/sitesite/js/plugin/mediaelement-and-player.min.js'
+    'bundles/sitesite/js/plugin/jquery.validate.min.js'
+    'bundles/sitesite/js/theme.js'
+    'bundles/sitesite/js/navigation.js'
+    'bundles/sitesite/js/plugin/jquery.singlePageNav.js'
+    'bundles/sitesite/js/contact-form.js'
+    'https://maps.googleapis.com/maps/api/js?sensor=false'
+    'bundles/sitesite/js/map.js'
+    'bundles/sitesite/js/plugin/TweenLite.min.js'
+    'bundles/sitesite/js/plugin/EasePack.min.js'
+    'bundles/sitesite/js/plugin/pollyfill.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% endblock javascripts %}
+    <script type="text/javascript">
+    jQuery(document).ready(function($) {
+        {% block end_javascripts %}
+        {% endblock end_javascripts %}
+    });
+    </script>
+
+{% endblock body %}
+</body>
+</html>
+
+{#
+    <!-- CSS -->
+    'bundles/sitesite/css/plugin/YTPlayer.css'
+
+    <!-- JS -->
+    'bundles/sitesite/js/plugin/jquery.mb.YTPlayer.min.js'
+
+#}
+
+

@@ -1,0 +1,39 @@
+name: sidemenu
+roles:
+    view: ROLE_EDITOR
+    edit: ROLE_ADMIN
+    delete: ROLE_SUPER_ADMIN
+menu:
+    admin:
+        name: bundles.admin.name
+        icon: fa-cog
+        path:
+            route: siteadmin_homepage
+    pageweb:
+        name: pageweb.name_s
+        icon: fa-desktop
+        role: ROLE_EDITOR
+        path:
+            route: siteadmin_entite
+            params:
+                entite: pageweb
+    messages:
+        name: message.name_s
+        icon: fa-paper-plane
+        role: ROLE_EDITOR
+        path:
+            route: siteadmin_entite
+            params:
+                entite: message
+    users:
+        name: bundles.User.name
+        icon: fa-users
+        role: ROLE_ADMIN
+        path:
+            route: site_user_homepage
+    translation:
+        name: bundles.translate.name
+        icon: fa-flag
+        path:
+            route: sitetranslate_homepage
+        role: ROLE_TRANSLATOR

@@ -1,0 +1,39 @@
+{% extends 'siteinterfaceBundle::page_admin_generic.html.twig' %}
+{% set cssjsloads = 'TAB' %}
+{% set DEVMODE = (app.environment in ['DEV', 'TEST']) or (is_granted('ROLE_SUPER_ADMIN')) %}
+{% trans_default_domain 'siteUserBundle' %}
+
+{% block page_heading %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12 m-t-xs">
+        <h2>{{ htitle|capitalize }}</h2>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('siteadmin_homepage') }}"><strong>Administration</strong></a></li>
+            <li><a href="{{ path('siteUser_users', {type: 'all'}) }}"><strong>Utilisateurs</strong></a></li>
+        </ol>
+        {% if DEVMODE %}
+        <hr class="m-b-sm m-t-xs">
+        <div class='btn-group'>
+            <a href="{{ path('siteUser_users', {type: type, action: 'check'}) }}" type="button" class="btn btn-danger btn-xs"><i class="fa fa-check icon-wait-on-click" data-icon-wait="{{ spinIcon|default('fa-cogs') }}"></i> Check tous utilisateurs</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock page_heading %}
+
+{% block content %}
+<div class="row title">
+    <h2 class="h2">{{ 'name'|trans|capitalize }}</h2>
+    {% block soustitre %}
+    {% endblock soustitre %}
+</div>
+{% if form is defined %}{% form_theme form 'siteUserBundle:Form:formuser-override.html.twig' %}{% endif %}
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="border-box">
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

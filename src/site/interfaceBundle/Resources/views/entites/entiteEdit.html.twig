@@ -1,0 +1,123 @@
+{% extends 'siteinterfaceBundle::page_admin_generic.html.twig' %}
+{% set cssjsloads = 'simple' %}
+{% set DEVMODE = (app.environment in ['dev', 'test']) or (is_granted('ROLE_SUPER_ADMIN')) %}
+
+{% block page_heading %}
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-12 m-t-xs">
+		<h2 class="row">
+			<div class="col-md-8">{{ (entite_name ~ '.name')|trans|capitalize }} {{ entite.nom|default('#' ~ entite.id) }}</div>
+			<div class="col-md-4">
+				<a href="{{ path('siteadmin_entite', {entite: entite_name, id: entite.id, action: 'delete'}) }}" type="button" class="btn btn-xs btn-danger btn-outline pull-right need-confirmation" data-message="{{ 'actions.suppQuestion'|trans({'%name%': entite.nom|default('#' ~ entite.id)})|capitalize }}"><i class="fa fa-times icon-wait-on-click"></i> {{ 'actions.supprimer'|trans|capitalize }}</a>
+				{#
+				<a href="{{ path('siteadmin_entite', {entite: entite_name, id: entite.id, action: 'edit'}) }}" type="button" class="btn btn-xs btn-warning pull-right"><i class="fa fa-pencil icon-wait-on-click"></i> {{ 'actions.modifier'|trans|capitalize }}</a>
+				#}
+				<a href="{{ path('siteadmin_entite', {entite: entite_name, id: entite.id, action: 'show'}) }}" type="button" class="btn btn-xs btn-white pull-right"><i class="fa fa-eye icon-wait-on-click"></i> {{ 'actions.voir'|trans|capitalize }}</a>
+				<a href="{{ path('siteadmin_entite', {entite: entite_name}) }}" type="button" class="btn btn-xs btn-white pull-right"><i class="fa fa-bars icon-wait-on-click"></i> {{ (entite_name ~ '.backlist_btn')|trans|capitalize }}</a>
+			</div>
+		</h2>
+		<ol class="breadcrumb">
+			<li><a href="{{ path('siteadmin_homepage') }}"><strong>{{ 'administration'|trans|capitalize }}</strong></a></li>
+			<li><a href="{{ path('siteadmin_entite', {entite: entite_name}) }}"><strong>{{ (entite_name ~ '.name_s')|trans|capitalize }}</strong></a></li>
+			<li><a href="{{ path('siteadmin_entite', {entite: entite_name, id: entite.id, action: 'show'}) }}"><strong>{{ entite.nom|default('#' ~ entite.id) }}</strong></a></li>
+			<li>{{ 'actions.modification'|trans|capitalize }}</li>
+		</ol>
+	</div>
+</div>
+{% endblock page_heading %}
+
+{% block content %}
+
+	{% set noErrors = ['submit', 'submit2', '_token', 'hidden'] %}
+	{% set prior = ["submit2", "nom"] %}
+	{% set lasts = ["submit"] %}
+    {{ form_start(edit_form) }}
+    {{ form_errors(edit_form) }}
+
+    {% for item in prior if edit_form[item] is defined %}
+        {{ form_row(edit_form[item]) }}
+        {% if item not in noErrors %}{{ form_errors(edit_form[item]) }}{% endif %}
+    {% endfor %}
+
+    {% for key,child in edit_form.children if ((key not in prior) and (key not in lasts)) %}
+        {{ form_row(child) }}
+        {{ form_errors(child) }}
+    {% endfor %}
+    
+    {% for item in lasts if edit_form[item] is defined %}
+        {{ form_row(edit_form[item]) }}
+        {% if item not in noErrors %}{{ form_errors(edit_form[item]) }}{% endif %}
+    {% endfor %}
+
+    {{ form_rest(edit_form) }}
+    {{ form_end(edit_form) }}
+
+{% endblock content %}
+
+{% block end_javascripts %}
+
+	if($(".image-crop > img").length) {
+		var $image = $(".image-crop > img")
+		$($image).cropper({
+		    aspectRatio: 1.618,
+		    preview: ".img-preview",
+		    done: function(data) {
+		        // Output the result data for cropping image.
+		    }
+		});
+	}
+
+	if($("#inputImage").length) {
+		var $inputImage = $("#inputImage");
+		if (window.FileReader) {
+		    $inputImage.change(function() {
+		        var fileReader = new FileReader(),
+		                files = this.files,
+		                file;
+
+		        if (!files.length) {
+		            return;
+		        }
+
+		        file = files[0];
+
+		        if (/^image\/\w+$/.test(file.type)) {
+		            fileReader.readAsDataURL(file);
+		            fileReader.onload = function () {
+		                $inputImage.val("");
+		                $image.cropper("reset", true).cropper("replace", this.result);
+		            };
+		        } else {
+		            showMessage("Please choose an image file.");
+		        }
+		    });
+		} else {
+		    $inputImage.addClass("hide");
+		}
+	}
+
+	$("#download").click(function() {
+	    window.open($image.cropper("getDataURL"));
+	});
+
+	$("#zoomIn").click(function() {
+	    $image.cropper("zoom", 0.1);
+	});
+
+	$("#zoomOut").click(function() {
+	    $image.cropper("zoom", -0.1);
+	});
+
+	$("#rotateLeft").click(function() {
+	    $image.cropper("rotate", 45);
+	});
+
+	$("#rotateRight").click(function() {
+	    $image.cropper("rotate", -45);
+	});
+
+	$("#setDrag").click(function() {
+	    $image.cropper("setDragMode", "crop");
+	});
+
+{% endblock end_javascripts %}

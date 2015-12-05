@@ -1,0 +1,59 @@
+{% trans_default_domain 'siteUserBundle' %}
+
+{% if form_errors(form) != null %}
+<div class="alert alert-danger">
+	{{ form_errors(form) }}
+</div>
+{% endif %}
+
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit clearfix">
+    <div class="form-field-wrapper">
+		{{ form_label(form.username) }}
+		{{ form_widget(form.username) }}
+		{{ form_errors(form.username) }}
+	</div>
+
+	<div class="form-field-wrapper">
+		{{ form_label(form.email) }}
+		{{ form_widget(form.email) }}
+		{{ form_errors(form.email) }}
+	</div>
+
+	<div class="form-field-wrapper">
+		{{ form_label(form.nom) }}
+		{{ form_widget(form.nom) }}
+		{{ form_errors(form.nom) }}
+	</div>
+
+	<div class="form-field-wrapper">
+		{{ form_label(form.prenom) }}
+		{{ form_widget(form.prenom) }}
+		{{ form_errors(form.prenom) }}
+	</div>
+
+	<div class="form-field-wrapper">
+		{{ form_label(form.adminhelp) }}
+		{{ form_widget(form.adminhelp) }}
+		{{ form_errors(form.adminhelp) }}
+	</div>
+
+	<div class="form-field-wrapper">
+		{{ form_label(form.admintheme) }}
+		{{ form_widget(form.admintheme) }}
+		{{ form_errors(form.admintheme) }}
+	</div>
+
+	<div class="form-field-wrapper">
+		{{ form_label(form.langue) }}
+		{{ form_widget(form.langue) }}
+		{{ form_errors(form.langue) }}
+	</div>
+
+	<div class="clearfix"></div>
+	<hr>
+	<br>
+	<input type="submit" value="{{ 'profile.action.modify'|trans|capitalize }}" class="btn btn-md btn-color-line" />
+	{{ form_rest(form) }}
+	<br>
+	<br>
+</form>

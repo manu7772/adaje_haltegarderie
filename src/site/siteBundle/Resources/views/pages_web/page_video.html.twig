@@ -1,0 +1,76 @@
+{% extends 'sitesiteBundle:bases:base_simple.html.twig' %}
+
+{% block sections %}
+
+        <!-- Intro Section -->
+        <section class="inner-intro inner-intro-xsmall light-color overlay-dark parallax parallax-background2" style="background-image: url({{ asset('bundles/sitesite/img/full/Guitare_galets.jpg') }});">
+            <div class="container">
+                <div class="row title">
+                    <h2 class="h2">{{ pageweb.titreh1|raw }}</h2>
+                </div>
+            </div>
+        </section>
+        <div class="pb-30 clearfix"></div>
+        <!-- End Intro Section -->
+
+        <!-- Sidebar Section -->
+        <section class="pb-sm-30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-4 mt-xs-30">
+
+                        <div class="sidebar-widget">
+                            <h5>Modèles</h5>
+                            <hr>
+                            <ul>
+                                <li><a>Imago Guitare Electric</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h5>{{ 'tag.name_s'|trans|capitalize }}</h5>
+                            <hr>
+                            <ul class="widget-tag">
+                                {% for tag in pageweb.tags|default([]) %}
+                                <li><a>{{ tag.nom }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9 col-sm-8">
+                        <div class="blog-post mb-30">
+                            <div class="post-media">
+                                <div class="owl-carousel item1-carousel nf-carousel-theme">
+                                    <div class="item">
+                                        <iframe src="https://player.vimeo.com/video/9324581" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                    </div>
+                                    <div class="item">
+                                        <iframe src="https://player.vimeo.com/video/9324581" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                    </div>
+                                    <div class="item">
+                                        <iframe src="https://player.vimeo.com/video/9324581" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="post-meta"><span>by <a>John Doe</a>,</span> <span>March 16, 2015</span></div> -->
+                            <div class="post-header">
+                                <h4><a href="blog-single-slider-post.html">{{ pageweb.titreh1|raw }}</a></h4>
+                            </div>
+                            <div class="post-entry">
+                                {{ pageweb.code|default('')|raw }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End Sidebar Section -->
+
+{% endblock sections %}
+
+{% block footer %}
+{{ include('sitesiteBundle:blocks:footer_simple.html.twig') }}
+{% endblock footer %}
